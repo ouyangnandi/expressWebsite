@@ -11,8 +11,6 @@
 
     <head>
 
-   
-
         <meta charset="UTF-8"/>
         <title>能通速递管理系统</title>
         <link rel="stylesheet" type="text/css" href="../css/themes/default/easyui.css"/>
