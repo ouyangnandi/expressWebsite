@@ -1,0 +1,118 @@
+<html>
+    <head>
+        <title>通知公告</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+
+
+        <script type="text/javascript" src="../../js/jquery.min.js"></script>
+        <script language="javaScript" >
+
+            $(document).ready(function() {
+                $('#headerContent').load('../../header.html');
+                $('#bottomContent').load('../../bottom.html');
+            
+             getNews();
+           
+            });
+
+            function getNews() {
+               
+                $.ajax(
+                        {type:"post",       
+                        url:"../backend/noticeB.php?action=1",
+                        dataType: "json",
+                        success:function(result) {
+                    if (result.status === 0) {
+                        var data = result.data;
+                        for (var i in data) {
+                            var str= "<div style='margin:0 28px 5px 28px;height:20px'>";
+                            str = str+ "<div class='newsTime'>" + data[i].updated_date + "</div>";
+                            str = str+ "<img id='" + data[i].id+"i'alt='"+data[i].id+"' src='../../imgs/news_p.png' class='newsImg'/>";
+                            str = str+ "<img id='" + data[i].id+"m' alt='"+data[i].id+"' style='display:none' src='../../imgs/news_m.png' class='newsImg'/>";
+                            str = str+"<div class='newsBar' id='" + data[i].id + "'> &nbsp" + data[i].subject + "</div>";
+                            str = str+"</div> <div class='newsContent' id='" + data[i].id + "c'><p>"+data[i].content+"</p></div>";
+                            $('#content').append( str);
+                        }
+                        $(".newsBar").click(
+                                function() {
+                                    var id = $(this).attr("id");
+                                   
+                                     $("#" + id+"i").toggle();
+                                     $("#" + id+"m").toggle();
+                                    $("#" + id+"c").slideToggle("normal");
+                                     
+                        $.post('../backend/noticeB.php?action=2',{notice_id:id} );
+
+                                });
+                                
+                       $(".newsImg").click(
+                                function() {
+                                    var id = $(this).attr("alt");
+                                   
+                                     $("#" + id+"i").toggle();
+                                     $("#" + id+"m").toggle();
+                                    $("#" + id+"c").slideToggle("normal");
+                                     
+                        $.post('../backend/noticeB.php?action=2',{notice_id:id} );
+
+                                });
+                        
+            
+
+                    } else {
+
+                    }
+                        },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("网页查询错误，请刷新页面");
+                    }
+                    
+        
+        });
+          
+            }
+            
+
+        </script>
+    </head>
+    <body>
+        <div id="headerContent"></div>
+
+
+
+
+        <div style="background-color:#EEEEEE;padding-top:14px;">
+            <div style="width:984px;margin:0 auto;">
+                <div style="height:19px;width:100%"></div>
+                <hr color="#D2D2D2" style="margin: 0px;"/>
+                <div class="queryHeadDiv">
+                    <div > 最新公告</div>
+                </div>
+            </div>
+
+            <div id="mainDiv" style="width:984px;margin:0 auto;background-color:white;">
+                <div style="height:7px;width:100%"></div>
+                <div class="dashline" style="margin:0 28px;height:14px"></div>
+                <img src="../../imgs/news.jpg" style="margin:0 28px  12px 28px"/>
+
+
+                <div class="dashline" style="margin:0 28px;height:5px"></div>
+                <div style="height:40px"></div>
+                <div style="margin:0 auto" id="content">
+
+                </div>
+                <div style="height:50px"></div>
+                <img src="../../imgs/productshadow.png" style="text-align:center;">
+
+
+                <div style="height:10px"></div>
+                <div id="bottomContent"> </div>
+            </div>
+        </div>
+
+    </body>
+</html>
+

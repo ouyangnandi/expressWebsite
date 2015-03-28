@@ -1,0 +1,154 @@
+﻿        
+<script language="javaScript" >
+    initTitle();
+    initProductList();
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null)
+            return unescape(r[2]);
+        return null;
+    }
+
+    function initTitle() {
+        var val = getQueryString("title");
+        if (val) {
+            var text;
+            if (val == 1) {
+                text = "关于CAN EXPRESS";
+            }
+            else if (val == 0) {
+                text = "";
+
+            }
+            
+            else if(val==2) {
+                  text = "产品及服务";
+            }
+            else if (val == 22) {
+                text = "订单查询";
+            }
+                        else if (val == 3) {
+                text = "公司新闻";
+            }
+                                    else if (val == 31) {
+                text = "通知公告";
+            }
+            
+            else if (val == 7) {
+                text = "注册新会员"
+            }
+            else if (val == 5) {
+                text = "在线下单"
+            }
+            else if (val == 23) {
+                text = "证件上传"
+            }
+            else if (val == 4) {
+                text = "联系我们"
+            }
+            else if (val == 6) {
+                text = "会员登录"
+            }
+
+            if (val == 0) {
+                $("#headBottomBar").height("8");
+                $("#headBottomBarBack").height("8");
+            }
+            else {
+                $("#headBottomBar").height("36");
+                $("#headBottomBarBack").height("36");
+            }
+            $("#barSquare").text(text);
+            $("#barSquare").show();
+        }
+        else{
+               $("#headBottomBar").height("8");
+                $("#headBottomBarBack").height("8");
+        }
+    }
+
+
+
+    function gotoPage(url, num) {
+        location.href = url + "=" + num;
+    }
+    
+    var hoverTimer, outTimer; 
+    var hoverTimer1, outTimer1;
+    function initProductList(){
+        $("#headerProduct").hover(function(){
+            clearTimeout(outTimer1); 
+            hoverTimer1 = setTimeout(function () {
+                 $("#productList").slideDown("normal")},200 ); 
+	},function(){
+        clearTimeout(hoverTimer1); 
+            outTimer1 = setTimeout(function () {
+                 $("#productList").slideUp("normal")},200 ); 
+	});
+        
+        
+         $("#headerNews").hover(function(){
+            clearTimeout(outTimer); 
+            hoverTimer = setTimeout(function () {
+                 $("#newsList").slideDown("normal")},200 ); 
+	},function(){
+        clearTimeout(hoverTimer); 
+            outTimer = setTimeout(function () {
+                 $("#newsList").slideUp("normal")},200 ); 
+	});
+
+    }
+
+
+</script>
+
+<div class="headBarBack">
+     <div id="logo"  onclick="gotoPage('/learnPhp/index.html?title', 0)"></div>
+    <div class="headBar" >
+       
+        <div class="headDivLeft">            
+            <div style="margin-top: 44px; margin-left:30px;">
+                <div class="guideSquare"  ><a href="/learnPhp/client/frontend/aboutUs.html?title=1" ><img src="/learnPhp/imgs/gywm.png" height="15" >&nbsp;</a></div>
+                <div class="guideSquare" id="headerProduct" ><a href="/learnPhp/client/frontend/product.html?title=2" ><img src="/learnPhp/imgs/cpjfw.png" height="15">&nbsp;</a>
+                    <ul id="productList" class="navProductList" >
+                                                <li>  <div class="dashline3"  ></div></li>
+                                                <li><a href="/learnPhp/client/frontend/product.html?title=2" >寄件需知</a></li>
+                                                <li>  <div class="dashline3" ></div></li>
+						<li><a href="/learnPhp/client/frontend/orderQuery.html?title=22">订单查询</a></li>
+                                                   <li>  <div class="dashline3" ></div></li>
+						<li><a href="/learnPhp/client/frontend/uploadID.html?title=23">证件上传</a></li>
+						
+			</ul>
+                
+                </div>
+                <div class="guideSquare" id="headerNews" ><a href="/learnPhp/client/frontend/news.html?title=3" ><img src="/learnPhp/imgs/xwzx.png" height="15">&nbsp;</a>
+                                    <ul id="newsList" class="navNewsList" >
+                                                <li>  <div class="dashline3"  ></div></li>
+                                                <li><a href="/learnPhp/client/frontend/news.html?title=3" >公司新闻</a></li>
+                                                <li>  <div class="dashline3" ></div></li>
+						<li><a href="/learnPhp/client/frontend/notice.html?title=31">通知公告</a></li>
+						
+			</ul>
+                
+                </div>
+                <div class="guideSquare"  ><a href="/learnPhp/client/frontend/feedback.html?title=4" ><img src="/learnPhp/imgs/lxwm.png" height="15">&nbsp;</a></div>
+                <div class="guideSquare"  ><a href="/learnPhp/client/frontend/orderOnline.html?title=5" ><img src="/learnPhp/imgs/zxxd.png" height="15">&nbsp;</a></div>
+                <div class="guideSquare"  ><a href="/learnPhp/client/frontend/register.html?title=7" ><img src="/learnPhp/imgs/zc.png" height="15">&nbsp;</a></div>
+                <div class="guideSquare"  style=" background-image:none;"><a href="/learnPhp/client/frontend/userLogin.html?title=6"><img src="/learnPhp/imgs/hydl.png" height="15">&nbsp;</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="headBottomBarBack" id="headBottomBarBack">
+    <div class="headBottomBar" id="headBottomBar">
+
+        <div style=" margin-left:5px;">
+            <div class="headBottomBarSquare" id="barSquare" ></div>
+
+        </div>
+
+
+    </div>
+
+</div>

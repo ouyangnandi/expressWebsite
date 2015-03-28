@@ -1,0 +1,209 @@
+
+<html>
+    <head>
+        <title>产品及服务</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+
+        
+        <script type="text/javascript" src="../../js/jquery.min.js"></script>
+
+           
+        <script type="text/javascript" src="../../js/spin.min.js"></script>
+        
+        <script language="javascript" >
+
+            var spinner = null;
+            function json2str(o) {
+                var arr = [];
+                var fmt = function(s) {
+                    if (typeof s == 'object' && s != null)
+                        return json2str(s);
+                    return /^(string|number)$/.test(typeof s) ? "\"" + s + "\"" : s;
+                }
+                for (var i in o)
+                    arr.push("\"" + i + "\":" + fmt(o[i]));
+                return '{' + arr.join(',') + '}';
+            }
+
+            function queryRoute() {
+
+                var opts = {
+                    lines: 14, // The number of lines to draw
+                    length: 12, // The length of each line
+                    width: 3, // The line thickness
+                    radius: 10, // The radius of the inner circle
+                    corners: 1, // Corner roundness (0..1)
+                    rotate: 0, // The rotation offset
+                    direction: 1, // 1: clockwise, -1: counterclockwise
+                    color: '#C0D4FE', // #rgb or #rrggbb or array of colors
+                    speed: 1, // Rounds per second
+                    trail: 100, // Afterglow percentage
+                    shadow: true, // Whether to render a shadow
+                    hwaccel: false, // Whether to use hardware acceleration
+                    className: 'spinner', // The CSS class to assign to the spinner
+                    zIndex: 2e9, // The z-index (defaults to 2000000000)
+                    top: '50%', // Top position relative to parent
+                    left: '50%' // Left position relative to parent
+                };
+                var target = document.getElementById('spin');
+                spinner = new Spinner(opts).spin(target);
+                loading();
+                //  $("#spin").show();
+                setTimeout("query()", 3000);
+
+            }
+
+            function query() {
+                var orderNum = $("#order_id").val();
+                $.post('../backend/queryRoute.php', {orderNum: orderNum}, function(result) {
+
+                    if (result.status == 0) {
+                        $("#routeStatus").val(result.status);
+                        $("#routeInfo").val(json2str(result.msg));
+                        $("#orderNum").val(orderNum);
+                          $("#orderNewNum").val(result.newOrderNumber);
+                         $("#orderNewCompany").val(result.newOrderCompany);
+                        spinner.stop();
+                        $("#routeForm").submit();
+                    } else  {
+                        spinner.stop();
+                        unloading();
+                        alert(result.msg);
+                    }
+                }, 'json');
+            }
+
+            function queryKey(event) {
+                if (event.keyCode == 13) {
+                    queryRoute();
+                }
+            }
+               function loading() {
+                $("body").addClass('overlay');
+                document.addEventListener("click", handler, true);
+                $("#order_id").attr("disabled", "disabled");
+                
+            }
+            function handler(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+
+            function unloading() {
+                $("body").removeClass('overlay');
+                document.removeEventListener("click", handler, true);
+                    $("#order_id").removeAttr("disabled"); 
+            }
+
+        </script>
+        
+    </head>
+    <body>
+        
+                <div id="headerContent"></div>
+                
+                 <div id="spin"></div>
+        <div style="background-color:#EEEEEE;padding-top:14px;">
+            <div style="width:984px;margin:0 auto;">
+                <div style="height:19px;width:100%"></div>
+                <hr color="#D2D2D2" style="margin: 0px;"/>
+                <div class="queryHeadDiv">
+                    <div > 查询订单详情</div>
+                </div>
+            </div>
+          
+                     <div id="mainDiv" style="width:984px;margin:0 auto;background-color:white;">
+                <div style="height:7px;width:100%"></div>
+                <div class="dashline" style="margin:0;height:18px"></div>
+                  <div style="height:31px"></div>
+                  <div class="bigDashLine">
+                      <img src="../../imgs/order_online.jpg" style="position:relative;top:5px" />  <img src="../../imgs/vertical-line.jpg" style="position:relative;bottom:65px"/> 
+                      <img src="../../imgs/safety_transfered.jpg" style="position:relative;top:7px"/> <img src="../../imgs/vertical-line.jpg" style="position:relative;bottom:65px"/> 
+                      <img src="../../imgs/home_delivery.jpg" style="position:relative;top:6px"/>
+                  </div>
+                  <div style="height:59px"></div>
+                  <div style="margin:0 46px;">
+                      <div class="blueBox">
+                          <div style="margin:26px 0 14px 34px;width:100px;font-family:Hei Regular,'黑体';">查询订单详情</div>
+                          <div style="margin:0 0 34px 34px"> <div class="orderQueryTextBar"><input type="text" class="orderQueryTextInput" id="order_id" onkeydown="queryKey(event)"/></div><img src="../../imgs/tracing_buttom.png" style="cursor:hand" id="queryButtom" onclick="queryRoute();"/> </div>
+                          <div  class="orderQueryText ">
+                              如果您有任何疑问，请联系能通速递客户服务中心 +61 0450 650 305，或给我们留言，我们将尽快给您致电。
+                          </div>
+                            <div class="dashline" style="margin:0 34px 18px 34px;height:18px"></div>
+                            <div class="orderQueryTips">友情提示</div>
+                            <div class="orderQueryText2">查询时间会根据网络情况不同而不同，一般需要10-15秒时间</div>
+                      
+                      </div>
+                      
+                      <div class="usefulLinks ">
+                           <div style="height:36px"></div>
+                           
+                           <div class="ulText">
+                               <img src="../../imgs/A.png " style="margin-right:13px"/>
+                               <span style="position:relative;bottom:10px">国内订单查询</span>
+                               <img src="../../imgs/enter.png" style="float:right;margin:12px 23px 0 0"/>
+                           </div>
+                             
+                           <div class="ulText">
+                               <img src="../../imgs/B.png " style="margin-right:13px"/>
+                               <span style="position:relative;bottom:10px">会员注册</span>
+                               <img src="../../imgs/enter.png" style="float:right;margin:12px 23px 0 0"/>
+                           </div>
+                              
+                           <div class="ulText">
+                               <img src="../../imgs/C.png " style="margin-right:13px"/>
+                               <span style="position:relative;bottom:10px">运费计算</span>
+                               <img src="../../imgs/enter.png" style="float:right;margin:12px 23px 0 0"/>
+                           </div>
+                              
+                           <div class="ulText">
+                               <img src="../../imgs/D.png " style="margin-right:13px"/>
+                               <span style="position:relative;bottom:10px">查找我们的网点</span>
+                               <img src="../../imgs/enter.png" style="float:right;margin:12px 23px 0 0"/>
+                           </div>
+                           
+                           <div class="ulText">
+                               <img src="../../imgs/E.png " style="margin-right:13px"/>
+                               <span style="position:relative;bottom:10px">注意事项</span>
+                               <img src="../../imgs/enter.png" style="float:right;margin:12px 23px 0 0"/>
+                           </div>
+                          
+                      </div>
+                      
+     
+
+                  </div>
+                  
+                                                             
+                                            <div style="display:none">
+                                                <form action="queryRoute.php?title=22" id='routeForm' method="post">
+                                                    <textarea id='routeStatus' name='routeStatus'></textarea>
+                                                    <textarea id='routeInfo' name='routeInfo'></textarea>
+                                                    <textarea id='orderNum' name='orderNum'></textarea>
+                                                         <input id='orderNewNum' name='orderNewNum'/>
+                                                      <input id='orderNewCompany' name='orderNewCompany'/>
+                                                </form>
+                                            </div>
+                 
+                   <div style="height:86px"></div>
+
+            <div id="mainDiv" style="width:984px;margin:0 auto;background-color:white;">
+                   <div style="height:10px"></div>
+                <div id="bottomContent"> </div>
+            </div>
+        </div>
+        </div>
+                <script type="text/javascript" >
+                           
+                
+                $(document).ready(function() {
+                $('#headerContent').load('../../header.html');
+                $('#bottomContent').load('../../bottom.html');
+            });
+
+
+            </script>
+    </body>
+</html>

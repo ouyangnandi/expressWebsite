@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>能通速递</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/themes/default/easyui.css"/>
+        <link rel="stylesheet" type="text/css" href="../../css/themes/icon.css"/>
+        <script type="text/javascript" src="../../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+        <script language="javaScript" >
+
+            $(document).ready(function() {
+                $('#headerContent').load('../../header.html');
+                $('#bottomContent').load('../../bottom.html');
+            });
+
+            function refreshCaptcha()
+            {
+                var d = new Date();
+                var img = $('#captchaimg');
+                var src   = '../../global/captcha_code.php?'+d.getTime();
+                img.attr('src', null);
+                img.attr('src', src);
+            }
+            
+            function submitRegister(){
+                    $('#register').form('submit', {
+                    url: '../backend/register.php?action=4',
+                    onSubmit: function() {
+                        return $(this).form('validate');
+                    },
+                    success: function(result) {
+                        var result = eval('(' + result + ')');
+
+                        if (result.status==1) {
+                             $.messager.alert('错误', "邮箱已经存在");
+                        }
+                        else if (result.status==2) {
+                             $.messager.alert('错误', "用户名已经存在");
+                        }
+                         else if (result.status==3) {
+                                     location="historyOrder.php";
+                        }
+                        else {
+                            $.messager.alert('错误', result.msg);
+                        }
+                    }
+                });
+            }
+            
+            
+           var verifyCodeStatus = false;
+            
+            $.extend($.fn.validatebox.defaults.rules, {
+                checkUsernameFormat: {
+                    validator: function(value, param) {
+                        return value.length >= param[0];
+                    },
+                    message: '账号长度至少是6位'
+                }
+            });
+            
+                        $.extend($.fn.validatebox.defaults.rules, {
+                checkPasswordFormat: {
+                    validator: function(value, param) {
+                        return value.length >= param[0];
+                    },
+                    message: '密码长度至少是6位'
+                }
+            });
+            
+               $.extend($.fn.validatebox.defaults.rules, {
+                checkEmail: {
+                    validator: function(value) {
+                        var reg = /\w+[@]{1}\w+[.]\w+/;
+                        return reg.test(value);
+                    },
+                    message: '邮箱格式不正确'
+                }
+            });
+            
+                $.extend($.fn.validatebox.defaults.rules, {
+                checkVerifyCodeFormat: {
+                    validator: function(value) {
+                        if(value.length <4) {
+                           verifyCodeStatus = false;
+                            return false;
+                        }
+                        else{
+                            
+                            if(verifyCodeStatus) {
+                                return true;
+                            }
+                       
+                              $.post('../backend/register.php?action=3', {code: value}, function(result) {
+                                if (result.status=="true") {
+                                 verifyCodeStatus = true;
+                                 $("#verifyCode").focus();
+                                    return true;
+                                } else {
+                                    verifyCodeStatus = false;
+                                   return false;
+                                }
+                            }, 'json');
+                        }
+        
+                    },
+                    message: '验证码不正确'
+                }
+            });
+            
+            
+            
+
+
+        </script>
+    </head>
+
+    <body>
+        <div id="headerContent"></div>
+        <div style="background-color:#EEEEEE;padding-top:14px;">
+            <div id="mainDiv" style="width:984px;margin:0 auto;">
+                <div style="height: 6px;"></div>
+
+                <div style="margin:0 28px; ">
+                    <div id="aboutusTitle">
+                        注册信息
+                    </div>
+                    <div class="dashline" style='margin:0 0 18px 0'></div>
+                    <div style="height: 11px;"></div>
+                    <div style="height:auto !important;min-height:100px">
+                        <div style="width:613px;display:inline-block;height:auto !important;min-height:100px" >
+                            <form id="register" method="post">
+                                <p class="regText">
+                                    欢迎加入能通速递,  我们致力于为您提供安全便捷的物流服务, 如需咨询请致电 +61 0450 650 305,  或发送邮件到 <a href="mailto:info@canexpress.com" style="text-decoration: none;">info@canexpress.com</a>.
+                                </p>
+                                <img style="margin:26px 0 35px 0" src="../../imgs/shadowR.png" />
+                                <table class="regTable"  >
+                                    <tr> <td style="padding-left: 5px">账号*</td><td style="padding-left: 5px">邮箱*</td></tr>
+                                    <tr> <td><input class="easyui-validatebox textbox"  type="text" name="username" id="username"  data-options="
+                                                                         required:true,
+                                                                         missingMessage:'账号不能为空',
+                                                                         validType:{checkUsernameFormat:[6]}"/></td>
+                                        <td><input class="easyui-validatebox textbox" type="text" id="email" name="email" data-options="
+                                                                         required:true,
+                                                                         missingMessage:'邮箱不能为空',
+                                                                         validType:'checkEmail'"/></td></tr>                 
+                                </table>
+
+                                <table class="regTable">
+                                    <tr> <td style="padding-left: 5px">密码*</td><td style="padding-left: 5px">验证码*</td></tr>
+                                    <tr> <td><input class="easyui-validatebox textbox" type="password" id="pass" name="pass" data-options="
+                                                                         required:true,
+                                                                         missingMessage:'密码不能为空',
+                                                                         validType:{checkPasswordFormat:[6]}"/></td>
+                                        
+                                        <td><input size="4" style="width:80px"  class="easyui-validatebox textbox"  maxlength="4" type="text" id="verifyCode" name="verifyCode"  data-options="
+                                                                         required:true,
+                                                                         missingMessage:'验证码不能为空',
+                                                                         validType:'checkVerifyCodeFormat',
+                                                                         tipPosition:'left'"
+                                                                         /><img onclick="refreshCaptcha();" style="cursor:pointer;margin-left:5px;vertical-align: top"  src="../../global/captcha_code.php" id='captchaimg'/> </td></tr>                 
+                                </table>
+
+                                <div style="float:right;margin-right:40px;">
+                                  <img style='cursor:pointer' src="../../imgs/submit.png" onclick='submitRegister()'/></div>
+                                <img style="margin:26px 0 4px 0" src="../../imgs/shadowR.png"  />
+                            </form>
+                        </div>
+
+                        <div style="width:295px;display:inline-block;height:auto !important;min-height:100px">
+
+                            <div class="regOnlineOrder" >
+
+
+                                <div style="text-align:center">
+                                    <img src="../../imgs/onlineOrder.png" height="71" width="115" style="margin:4px 0 16px 0"/>
+                                </div>
+                                <span class="textStyle" style="text-align: left;">能通速递为您提供更优质的专业的国际拖运服务，并准确地预计递送日期。节省您宝贵的时间和金钱。</span>
+                                <div style="text-align:center" >
+                                    <a style="text-decoration: none;" href="orderOnline.html"> <span style="font-size:14px;line-height:14px; font-family: '黑体',Arial Unicode MS,Arial,sans-serif;color:#3e4981" > 开始寄件 </span><img src="../../imgs/right_arrow.jpg" height="7" style="vertical-align: middle"/> </a>
+                                </div>
+                                <hr/>
+                            </div>
+
+
+                            <div style="text-align: center;margin-left: 25px;height:215px;">
+                                <img src="../../imgs/regGirl.png" style="margin-bottom:13px;"/>
+                                <div>
+                                    <a style="font-size:14px;line-height:14px; font-family: '黑体',Arial Unicode MS,Arial,sans-serif;color:#3e4981;text-decoration: none" href="mailto:info@canexpress.com.au"> Email us </a><img src="../../imgs/right_arrow.jpg" height="7" style="vertical-align: middle;"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div id="bottomContent"> </div>
+
+            </div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>能通速递</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/themes/default/easyui.css"/>
+        <link rel="stylesheet" type="text/css" href="../../css/themes/icon.css"/>
+        <script type="text/javascript" src="../../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../../js/jquery.easyui-cn.js" charset="utf-8"></script>
+        <script language="javaScript" >
+            var verifyCodeStatus = false;
+            $(document).ready(function() {
+                $('#headerContent').load('../../header.html');
+                $('#bottomContent').load('../../bottom.html');
+
+                $.post('../backend/userLogin.php?action=2', function(result) {
+                    if (result.status == "true") {
+                        location.href = "historyOrder.php";
+                    } else {
+
+                    }
+                }, 'json');
+
+            });
+
+            function refreshCaptcha()
+            {
+                var d = new Date();
+                var img = $('#captchaimg');
+                var src = '../../global/captcha_code.php?' + d.getTime();
+                img.attr('src', null);
+                img.attr('src', src);
+            }
+
+            $.extend($.fn.validatebox.defaults.rules, {
+                checkUsernameFormat: {
+                    validator: function(value, param) {
+                        return value.length >= param[0];
+                    },
+                    message: '账号长度至少是6位'
+                }
+            });
+
+            $.extend($.fn.validatebox.defaults.rules, {
+                checkPasswordFormat: {
+                    validator: function(value, param) {
+                        return value.length >= param[0];
+                    },
+                    message: '密码长度至少是6位'
+                }
+            });
+
+            $.extend($.fn.validatebox.defaults.rules, {
+                checkEmail: {
+                    validator: function(value) {
+                        var reg = /\w+[@]{1}\w+[.]\w+/;
+                        return reg.test(value);
+                    },
+                    message: '邮箱格式不正确'
+                }
+            });
+
+
+            $.extend($.fn.validatebox.defaults.rules, {
+                checkVerifyCodeFormat: {
+                    validator: function(value) {
+                        if (value.length < 4) {
+                            verifyCodeStatus = false;
+                            return false;
+                        }
+                        else {
+
+                            if (verifyCodeStatus) {
+                                return true;
+                            }
+
+                            $.post('../backend/userLogin.php?action=3', {code: value}, function(result) {
+                                if (result.status == "true") {
+                                    verifyCodeStatus = true;
+                                    $("#verifyCode").focus();
+                                    return true;
+                                } else {
+                                    verifyCodeStatus = false;
+                                    return false;
+                                }
+                            }, 'json');
+                        }
+
+                    },
+                    message: '验证码不正确'
+                }
+            });
+
+            function submitLogin() {
+                $('#login').form('submit', {
+                    url: '../backend/userLogin.php?action=4',
+                    onSubmit: function() {
+                        return $(this).form('validate');
+                    },
+                    success: function(result) {
+                        var result = eval('(' + result + ')');
+
+                        if (result.status == 1) {
+                            $.messager.alert('错误', "用户名或者密码错误");
+                        }
+                        else if (result.status == 2) {
+                            location.href = "historyOrder.php";
+                        }
+                        else {
+                            $.messager.alert('错误', result.msg);
+                        }
+                    }
+                });
+            }
+
+            function  lostPassword() {
+                $('#lostPassword').form('submit', {
+                    url: '../backend/userLogin.php?action=5',
+                    onSubmit: function() {
+                        return $(this).form('validate');
+                    },
+                    success: function(result) {
+
+                        var result = eval('(' + result + ')');
+
+                        if (result.status == 2) {
+                            $.messager.alert('错误', "邮箱或者账户不存在");
+                        }
+                        else if (result.status == 1) {
+                            $.messager.alert('忘记密码', "新密码已经发送到您的邮箱，请注意查收");
+                        }
+                        else if (result.status == 3) {
+                            $.messager.alert('错误', "系统错误，请联系客服");
+                        }
+                        else if (result.status == 4) {
+                            $.messager.alert('错误', "系统邮箱错误，请联系客服");
+                        }
+                    }
+                });
+            }
+
+
+        </script>
+    </head>
+
+
+    <body>
+        <div id="headerContent"></div>
+
+        <div style="background-color:#EEEEEE;padding-top:14px;">
+            <div id="mainDiv" style="width:984px;margin:0 auto;background-color:white;">
+                <div style="height: 6px;"></div>
+                <hr color="#D2D2D2"/>
+
+                <div style="margin:0 28px; ">
+                    <div id="aboutusTitle">
+                        会员登录
+                    </div>
+                    <div class="dashline" style='margin:0 0 18px 0'></div>
+                    <div style='width:822px;height:361px;margin:20px 50px 45px 50px'>
+                        <div style="width:526px;border-right:2px solid #cbcbcb;display:inline-block;float:left;height:360px;">
+                            <div style="height:40px"></div>
+                            <span class="loginText">登录</span>
+                            <div style="height:16px"></div>
+
+                            <div style="width:474px;height:232px;background-color: #f7f7f7">
+                                <form id="login" method="post">
+                                    <div style="height:45px"></div>
+                                    <div class="accountPassText" style="margin-left:105px">帐号</div>
+                                    <div class="accountPassInput" style="margin-left:105px"><input class="easyui-validatebox textbox"  type="text" name="username" id="username" data-options="
+                                                                                                   required:true,
+                                                                                                   missingMessage:'账号不能为空',
+                                                                                                   validType:{checkUsernameFormat:[6]}" /></div>
+                                    <div class="accountPassText" style="margin-left:105px">密码</div>
+                                    <div class="accountPassInput" style="margin-left:105px"><input class="easyui-validatebox textbox" type="password" id="pass" name="pass" data-options="
+                                                                                                   required:true,
+                                                                                                   missingMessage:'密码不能为空',
+                                                                                                   validType:{checkPasswordFormat:[6]}" /></div>
+                                </form>
+                            </div>
+                            <div style="height:22px"></div>
+                            <div style="text-align: right"><img src="../../imgs/submitBotton.jpg" style="margin-right:50px;cursor:pointer;" onclick='submitLogin();' /></div>
+
+                        </div>
+
+                        <div style="width:223px;margin-left:50px;display:inline-block;float:left;height:360px">
+                            <div style="height:40px"></div>
+                            <span class="loginText">忘记密码</span>
+                            <div style="height:16px"></div>
+                            <form id="lostPassword" method="post">
+                                <div class="accountPassText" >帐号</div>
+                                <div class="accountPassInput" ><input  class="easyui-validatebox textbox"  type="text" name="fUsername" id="fUsername" data-options="
+                                                                       required:true,
+                                                                       missingMessage:'账号不能为空',
+                                                                       validType:{checkUsernameFormat:[6]}"/></div>
+                                <div class="accountPassText"  >邮箱</div>
+                                <div class="accountPassInput"><input class="easyui-validatebox textbox" type="text" id="fEmail" name="fEmail" data-options="
+                                                                     required:true,
+                                                                     missingMessage:'邮箱不能为空',
+                                                                     validType:'checkEmail'" /></div>
+                                <div class="accountPassText" >验证码</div>
+                                <div class="accountPassInput"><input style="width:100px;" size='4' class="easyui-validatebox textbox"  maxlength="4" type="text" id="verifyCode" name="verifyCode"  data-options="
+                                                                     required:true,
+                                                                     missingMessage:'验证码不能为空',
+                                                                     validType:'checkVerifyCodeFormat',
+                                                                     tipPosition:'left'" /><a href='javascript: refreshCaptcha();'><img  style="cursor:pointer;margin-left:5px;vertical-align: top"  src="../../global/captcha_code.php" id='captchaimg'/></a></div>
+                                <div style="height:75px"></div>
+                                <div style="text-align: right"><img src="../../imgs/submitBotton.jpg" style="margin-right:50px;cursor:pointer;" onclick='lostPassword();'/></div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div id="bottomContent"> </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

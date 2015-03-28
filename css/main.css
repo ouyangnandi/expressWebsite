@@ -1,0 +1,986 @@
+@charset "utf-8";
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.linkTable ul li {
+    background-image: url("../imgs/arrow.png");
+    background-repeat: no-repeat;
+    background-position: 0px 5px; 
+    padding-left: 11px;
+    margin-bottom: 9px;
+}
+
+body {
+    margin:0px;
+}
+
+.textbox{
+    height:20px;
+    margin:0;
+    padding:0 2px;
+    box-sizing:content-box;
+}
+.center {text-align:center;}
+.line {margin:10px;height:15px}
+.inputLine{width:100px;
+           text-align:left;
+           display: inline-block;
+           float:left;
+}
+.oddRow{background-color:#CEF6EC;}    
+.inputTitle{
+    width:50px;
+    text-align:left;
+    display: inline-block;
+    margin-top:5px;
+    float:left;
+}
+
+.guideSquare {
+    display:inline-block;
+    height:31px;
+    line-height: 31px;
+    vertical-align: middle;
+    color:#cdfff3;
+    font-size:15px; 
+    font-family:"黑体", Arial, Helvetica, sans-serif;
+    background-image: url("../imgs/navigator_line.png");
+    background-position:right;
+    background-repeat:no-repeat;
+    float:left;
+   
+}
+
+
+.guideSquare a
+{
+    text-decoration:none;
+    color:white;
+    padding: 8px 0px 8px 6px;
+    margin-right:3px;
+   
+}
+
+.guideSquare a img
+{
+  border:none;
+   
+}
+
+.guideSquare a:hover {
+    background-color: #3D4B78;
+}
+
+
+#logo {
+    float: left;
+    margin-top: 11px;
+    height:48px;
+    display:inline;
+    width:225px;
+    background: url("../imgs/logo.png");
+    background-repeat:no-repeat;
+    cursor:pointer;
+}
+
+#logo2 {
+    height:41px;
+    width:101px;
+    background: url("../imgs/logo2.png");
+    background-repeat:no-repeat;
+    cursor:pointer;
+
+}
+
+
+.headBottomBarBack{
+    background-color:#363636;
+    width:100%;
+}
+
+.headBottomBar {
+    line-height: 36px;
+    vertical-align: middle;
+    font-size: 12px;
+    width:984px;
+    margin:0 auto;
+}
+.headBottomBarSquare {
+    float:left;
+    display:inline-block;
+    color:#cdfff3;
+    display:none;
+    position:relative;
+}
+
+
+.dashline {
+    background: url("../imgs/dashdot.png") repeat-x;
+    height:8px;
+    margin-left: 28px;
+    margin-right:28px;
+}
+
+.dashline2 {
+    background: url("../imgs/dashdot.jpg") repeat-x;
+    height: 10px;
+    margin-top:5px;
+}
+.dashline3 {
+    background: url("../imgs/dashdot.png") repeat-x;
+    height: 5px;
+    margin:0px
+}
+
+.contact {
+    display:inline-block;
+    line-height:33px;
+    vertical-align:middle;
+    height:33px;
+
+}
+
+.contactNum {
+
+    font-size: 19.84px;
+    color:#3C3C3C;
+    font-family: "Arial Rounded MT Bold","arial",sans-serif;
+    font-weight: bold;
+}
+
+.contactTitle {
+    font-family: "黑体";
+    font-size: 16px;
+    font-weight:normal;
+}
+
+
+.shadow {
+    text-align: left;
+    height:15px;
+}
+
+.dashlineVertical {
+    display:inline-block;
+    border-right:1pt solid #D0D0D0;
+    height: 175px;
+    width:1px;
+    margin:0 16px 0 15px;
+    float:left;
+}
+
+.divBlock {
+    display:inline-block;
+    width:273px; 
+    height: 170px;
+    float:left;
+
+}
+
+.shadowBlock {
+    border:#bfbfbf 1px solid;
+    background:#e3e3e3;
+    color:#333;
+    -moz-box-shadow: -1px 2px  5px #DAD6D5;
+    -webkit-box-shadow: -1px 2px 5px #DAD6D5;
+    box-shadow:-1px 2px 5px #DAD6D5;
+    background:url("../imgs/lightDot.jpg");
+}
+
+.notice {
+    display:inline-block;
+    line-height:30px;
+    font-family:"宋体","微软雅黑";
+    font-size:20px;
+    font-weight:bold;
+    vertical-align:middle;
+    height: 30px;
+    margin-right: 5px;
+    color:#3C5BB1;
+}
+
+.noticeContent1 {
+    line-height:20.69px;
+    font-family:"微软雅黑","黑体";
+    color:#808080;
+    font-size:12.25px;
+    text-align: left;
+    padding-left:14px;
+    position:relative;
+}
+
+.noticeContent {
+    line-height:15px;
+    text-align: left;
+}
+.queryDesc {
+    height:25px;
+    line-height:25px;
+    font-size:12.5px;
+    color:#878787;
+    text-align: left;
+    font-family: 'Hei Regular','黑体';
+    padding-left:5px;
+    padding-top:5px;
+    background-color:#F1F1F1;
+}
+
+
+.queryButton {
+    background:url("../imgs/query.png") no-repeat;
+    width:21px;
+    height:21px;
+    border:0 none;
+    cursor: pointer;
+
+    margin-top: 2px;
+}
+
+.queryTextBox{
+    border:0 none;
+    height:27px;
+    padding:0;
+    margin:0;
+    line-height:27px;
+    font-size:14px;
+    width:100%;
+    text-align: left;
+
+}
+
+.overIcon {
+    position: relative;
+    top:-15px;
+    right:30px;
+}
+
+.headBar {
+
+    height:89px;
+    width:984px;
+    margin:0 auto;
+
+}
+
+.headBarBack{
+    background: url("../imgs/headBarBac.png");
+    background-repeat: repeat;
+    width:100%;
+    height:90px;
+}
+
+.headDivLeft {
+    vertical-align:middle;
+    display:inline-block;
+    height:100%;
+    width:750px;
+    position:relative;
+    left: -30px;
+    text-align:left;
+
+}
+
+.bottomText {
+    font-family:Hei Regular,"微软雅黑";
+    color:grey;
+    font-size:12.5px;
+    line-height: 15px;
+}
+
+.bottomText2{
+    text-align: left;
+    font-family:"微软雅黑", Arial, Helvetica, sans-serif;
+    color:grey;
+    font-size:11.25px;
+    line-height:35px; 
+    display:inline-block;
+    height:100%;
+    float:left;
+}
+
+.bottomText2 a{
+    text-decoration: none;
+    font-family:"微软雅黑", Arial, Helvetica, sans-serif;
+    color:grey;
+}
+
+.bottomText3{
+    text-align: left;
+    font-family:"微软雅黑", Arial, Helvetica, sans-serif;
+    color:grey;
+    font-size:11.25px;
+
+    line-height:35px; 
+    display:inline-block;
+    margin-left: 15px;
+    float:left;
+    vertical-align: middle;
+}
+
+.linkTable {
+    margin: 0 auto;
+    margin-bottom: 12px;
+
+}
+.linkTable td {
+    padding-right: 51px;
+    vertical-align: top;
+
+}
+
+.linkTable td a {
+
+    color:#AAAAAA;
+    text-decoration:none;
+    font-size:12.5px;
+    font-family:Hei Regular,"黑体";
+}
+
+
+.child {
+    font-weight: normal;
+}
+
+.divLine {
+    border-top:1px solid grey;
+}
+
+
+#aboutusTitle {
+    height:55px;
+    line-height:55px;
+    font-size:23px;
+    font-family: "黑体",Arial Unicode MS,Arial,sans-serif;
+    vertical-align: middle;
+}
+
+#aboutUsContact{
+
+    margin-left: 25px;
+    width:272px;
+    height:259px;
+    -moz-box-shadow: 2px 2px  10px #909090;
+    -webkit-box-shadow: 2px 2px 10px #909090;
+    box-shadow:2px 2px 10px #909090;
+    border:#bfbfbf 1px solid;
+    display:inline-block;
+    float:left;
+}
+
+#aboutUsOnlineOrder{
+    height:200px;
+    display:inline-block;
+    float:left;
+    width:272px;
+    margin-left: 25px;
+}
+
+.textStyle {
+    font-size:14px;
+    line-height:20px;
+    color:#878787;
+    font-family: "黑体",Arial Unicode MS,Arial,sans-serif;
+}
+.divAboutusContact {
+    background:url("../imgs/lightDot.jpg");
+    background-repeat: repeat;
+    height:169px;
+
+}
+
+.contactusText{
+
+    text-align: center;
+    font-size:14px;
+    line-height:20px;
+    color:#878787;
+    font-family: "黑体",Arial Unicode MS,Arial,sans-serif;
+}
+
+.routeTableStyle{
+    width:100%; 
+}
+
+.routeTableStyle {
+    border-right:1px solid #D0DFE5;
+    border-bottom:1px solid #D0DFE5;
+
+} 
+
+
+.routeTableStyle td{border-left:1px solid #D0DFE5;
+                    border-top:1px solid #D0DFE5;
+                    border-right:none;
+                    border-bottom:none;
+                    text-align: center;
+                    color:#153D5C;
+                    line-height: 20px;
+} 
+.routeTableStyle th{border-left:1px solid #D0DFE5;
+                    border-top:1px solid #D0DFE5;
+                    background-color: #F2F2F2;
+                    text-align: center;
+                    color:#153D5C;
+                    border-right:none;
+                    border-bottom:none;
+                    line-height: 20px;
+}
+
+.detailsTable {
+
+}
+
+.detailsTable  td{
+    width:140px;
+    text-align:left;
+    font-size:12px;
+}
+
+.textColor {
+    color:#8A2BE2;
+}
+
+.subtitle {
+    font-size:13px;
+    font-weight: bold;
+}
+
+.detailsTable2 {}
+.detailsTable2  td{
+    width:160px;
+    text-align:left;
+    font-size:12px;
+}
+.detailsTable2  input{
+    width:97%;
+}
+
+.queryHeadDiv {
+    width:100%;
+    height:48px;
+    line-height: 48px;
+    vertical-align: middle;
+    font-size:21px;
+    font-family: "黑体",Arial Unicode MS,Arial,sans-serif;
+    padding-left:31px;
+    color:#484848;
+    font-weight: bold;
+}
+
+.queryBlueDiv {
+    background: url("../imgs/query_blue.png");
+    margin:0 28px;
+
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
+
+    height:40px;
+    line-height: 40px;
+    font-family: "黑体",Arial Unicode MS,Arial,sans-serif;
+    vertical-align: middle;
+    font-size:17px;
+    font-weight: bold;
+    color:#556290;
+}
+
+.queryTableDiv{
+    margin:59px 28px 40px 28px;
+
+}
+.routeTable {
+    cellpadding:0;
+
+}
+.routeTable td {
+    height:24px;
+
+    font-family: "黑体",Arial Unicode MS,Arial,sans-serif;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dateColumn {
+    color:white;
+    background:url("../imgs/black_arrow.png") no-repeat ;
+    background-position:bottom left;
+    vertical-align: bottom !important;
+}
+
+.cityColumn {
+    font-size: 20px !important;
+    font-weight: normal !important;
+    color:#9D9D9D;
+}
+
+.timeColumn {
+    color:#9D9D9D;
+}
+
+.infoColumn {
+    background-color:#F0F0F0;
+    color:#9D9D9D;
+}
+
+.infoColumn2 {
+    color:#9D9D9D;
+}
+
+.queryShadow {
+    background:url("../imgs/query_shadow.png") no-repeat ;
+    margin: 0 28px;
+    height:31px;
+}
+
+.orderTips {
+    height:16px;
+    text-align: center;
+    font-family: "黑体",Arial Unicode MS,Arial,sans-serif;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.overlay {
+    position: fixed;
+    z-index: 1000;
+    background: black;
+    display: block;
+    opacity: .75;
+    filter: alpha(opacity=75);
+    width: 100%;
+    height: 100%;
+}
+
+.infoProvider{
+    text-align:right;
+    font-family: "黑体",Arial Unicode MS,Arial,sans-serif;
+    vertical-align: middle;
+    font-size: 12px;
+}
+
+.regTable {
+    margin-bottom:15px;
+}
+
+.regTable td {
+    width:270px;
+
+    font-family:"黑体",Arial Unicode MS,Arial,sans-serif;
+    font-size:13px;
+    border-spacing: 0px;
+}
+
+.regTable input{
+    height:24px;
+    line-height:24px;
+    width:234px;
+    border:1px solid #D4D4D4;
+    font-size: 19px;
+}
+
+.regText{
+    width:579px;
+    font-family:"黑体",Arial Unicode MS,Arial,sans-serif;
+    color: #878787;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.regOnlineOrder{
+    height:210px;
+
+    width:272px;
+    margin-left: 25px;
+}
+
+.blueWhite {
+    background:url("../imgs/arrow_back.png") no-repeat;
+    line-height:35px;
+    height: 35px;
+    font-size:17px;
+    background-position:left center;
+    vertical-align: middle;
+
+}
+.onlineOrderMinTitle{
+    font-family:"黑体",Arial Unicode MS,Arial,sans-serif;
+    margin-left:140px;
+    line-height: 21px;
+    height:21px;
+    font-size: 17px;
+    vertical-align: middle;
+    width:200px;
+}
+
+.onlineOrderInputDiv{
+    height:28px;
+    width:100%;
+    text-align: center;
+    font-family:"黑体",Arial Unicode MS,Arial,sans-serif;
+    font-size: 15px;
+    margin-bottom: 22px;
+}
+.onlineOrderInput {
+    width:428px;
+    margin-left:15px;
+    height:26px;
+    border:1px solid  #D4D4D4;
+    font-size: 15px;
+    font-family:"黑体",Arial Unicode MS,Arial,sans-serif;
+}
+
+.onlineOrderTips{
+
+    padding:20px 34px 32px 34px;
+    font-family:"黑体",Arial Unicode MS,Arial,sans-serif;
+    font-size: 15px;
+    color: #878787;
+}
+
+.productText {
+    color:#AAAAAA;
+    display: inline-block;
+    font-size:13px;
+    font-family:Hei Regular,"黑体";
+    margin:8px  0 0 60px;
+
+}
+
+.productText ul {
+    list-style-type: disc;
+}
+
+.productText ul li {
+    margin-bottom: 5px;
+
+}
+
+.productTitle {
+    position:relative;
+    bottom:10px;
+    display:inline-block;
+    font-size: 18px;
+    color:#4E5689;
+    font-family:Hei Regular,"黑体";
+}
+
+.bigDashLine {
+    background-image: url("../imgs/dashline.jpg");
+    width:870px;
+    margin:0 46px;
+    background-repeat:repeat-x;
+    text-align:center;
+    background-position: bottom;
+
+}
+
+.blueBox{
+    background-image: url("../imgs/blue_box.png");
+    background-repeat:no-repeat;
+    height:276px;
+    width:582px;
+    display:inline-block;
+    float:left;
+
+}
+.usefulLinks {
+    background-image: url("../imgs/useful_links.png");
+    background-repeat:no-repeat;
+    width:253px;
+    height:279px;
+    display:inline-block;
+    margin-left:34px;
+}
+
+.orderQueryText {
+    margin:0 34px 13px 34px;
+    font-size:13px;
+    font-family:微软雅黑,Hei Regular,"黑体";
+    line-height:16px;
+    color:#AAAAAA;
+}
+
+.orderQueryTips {
+    margin:0 0 0 34px;
+    font-size:14px;
+    font-family:微软雅黑,Hei Regular,'黑体';
+    color:#4E5689;
+}
+
+.orderQueryText2 {
+    margin:0 0 0 34px;
+    font-size:13px;
+    font-family:微软雅黑,Hei Regular,"黑体";
+    line-height:16px;
+    color:#AAAAAA;
+}
+.ulText {
+    font-size: 15px;
+    font-family:Hei Regular,"黑体";
+    margin-left:13px;
+    font-weight: bold;
+    margin-top:12px;
+}
+
+.orderQueryTextBar {
+    display:inline-block;
+    float:left;
+    background-image: url("../imgs/text_bar.png");
+    background-repeat:no-repeat;
+    width:373px;
+    height:36px;
+}
+
+.orderQueryTextInput {
+    border: 0 none;
+    height: 31px;
+    width:360px;
+    margin: 2px 3px 0 3px;
+    line-height: 30px;
+    font-size: 15px;
+
+
+}
+
+
+.navProductList {
+    margin-right: 4px;
+    display:none;
+    opacity: 0.75;
+
+}
+
+.navProductList li {
+    background-color: #545B90;
+
+}
+.navProductList li a {
+    font-size:14px;
+    display:block; 
+    width:79px;
+    height:30px;
+    padding:0;
+    text-align: center;
+
+}
+
+.navNewsList {
+    margin-right: 4px;
+    display:none;
+    opacity: 0.75;
+
+}
+
+.navNewsList li {
+    background-color: #545B90;
+
+}
+
+.navNewsList  li a {
+    font-size:14px;
+    display:block; 
+    width:64px;
+    height:30px;
+    padding:0;
+   
+ text-align: center;
+}
+
+
+
+.newsTime {
+    line-height: 20px;
+    font-family: "黑体",Arial Unicode MS,Arial,sans-serif;
+    vertical-align: middle;
+    font-size: 15px;
+    font-weight: bold;
+    color:#9D9D9D;
+    display:inline-block;
+    float:left;
+
+}
+
+.newsBar {
+    line-height: 20px;
+    font-family: "微软雅黑",Arial Unicode MS,Arial,sans-serif;
+    vertical-align: middle;
+    font-size: 15px;
+    font-weight: bold;
+    color:black;
+    display:inline-block;
+
+    background-image: url("../imgs/news_bar.jpg");
+    height:20px;
+    width:735px;
+    cursor:pointer;
+}
+
+
+.newsContent{
+    line-height: 20px;
+    font-family: "微软雅黑",Arial Unicode MS,Arial,sans-serif;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: bold;
+    color:#9D9D9D;
+    margin-left: 232px;
+    width:713px;
+    margin-bottom:14px;
+    display:none;
+}
+
+.newsImg{
+    margin:3px 12px 0 12px;
+    display:inline-block;
+    float:left;
+    cursor:pointer;
+}
+
+.accountDetail{
+    display:inline-block;
+
+    float:left;
+    font-family: "微软雅黑",Arial Unicode MS,Arial,sans-serif;
+    font-size: 14px;
+    text-align:left;
+    vertical-align: middle;
+    height:35px;
+    line-height: 15px;
+}
+
+.accountDetail div
+{
+    width:100px;
+    margin-right:10px;
+    display:inline-block;
+    float:left;
+    vertical-align: middle;
+    height: 35px;
+    line-height: 25px;
+        font-size: 14px;
+}
+
+.accountInput {
+    width:375px;
+    height:34px;
+    border:1px solid #c6c6c6;
+    line-height: 30px;
+    font-size: 20px;
+    font-family: "微软雅黑",Arial Unicode MS,Arial,sans-serif;
+}
+
+
+.accountSpan {
+    width:100px;
+    margin-right: 10px;
+
+}
+
+.accoutExit
+{
+    font-size: 13px;
+    color:#707070;
+     font-family: "微软雅黑",Arial Unicode MS,Arial,sans-serif;
+     line-height: 20px;
+    
+    
+}
+
+.accountPassHelp{
+    background-image: url("../imgs/need_help.jpg");
+    background-repeat: no-repeat;
+    background-position: left top;
+    height:240px;
+    width:360px;
+    display:inline-block;
+    
+}
+
+.accountPassText{
+         font-family: "黑体",Arial Unicode MS,Arial,sans-serif;
+     font-size: 13px;
+     line-height: 20px;
+     height:20px;
+     margin:16px 0 0px 5px;
+     color:black;
+}
+
+.accountPassInput input {
+    
+    line-height: 18px;
+    font-size: 15px;
+    border: 1px solid #a9a9a9;
+    width:220px;
+    margin: 0;
+    
+}
+
+.orderTable
+{
+    margin:0px 70px 40px 70px;
+    width: 840px;
+  border-spacing:0px 3px;
+    
+}
+
+.orderTable th 
+{
+    
+    width:25%;
+    text-align: left;
+      font-family: "微软雅黑",Arial Unicode MS,Arial,sans-serif;
+      font-size: 13px;
+      height:50px;
+}
+
+.orderTable tr
+{
+    
+  
+    text-align: left;
+      font-family: "微软雅黑",Arial Unicode MS,Arial,sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+        
+}
+
+.orderTable td {
+    border:none;
+    padding:0px;
+    height:25px;
+  
+    
+    
+}
+
+.orderTable tr a {
+  
+   color:black;
+    
+}
+
+.orderTableT1 {
+    background-color: #ececec;
+}
+
+.orderTableT2 {
+     background-color: #f4f4f4;
+}
+
+
+.loginText {
+    font-size: 22px;
+   
+        font-family: "微软雅黑",Arial Unicode MS,Arial,sans-serif;
+    
+}
+
+.accountLinks a {
+    text-decoration: none;
+   margin-right: 8px;
+}
+

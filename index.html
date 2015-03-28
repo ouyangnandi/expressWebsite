@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>能通速递</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/spin.min.js"></script>
+        <script language="javascript" >
+ 
+            var spinner = null;
+            function json2str(o) {
+                var arr = [];
+                var fmt = function(s) {
+                    if (typeof s == 'object' && s != null)
+                        return json2str(s);
+                    return /^(string|number)$/.test(typeof s) ? "\"" + s + "\"" : s;
+                }
+                for (var i in o)
+                    arr.push("\"" + i + "\":" + fmt(o[i]));
+                return '{' + arr.join(',') + '}';
+            }
+
+            function queryRoute() {
+
+                var opts = {
+                    lines: 14, // The number of lines to draw
+                    length: 12, // The length of each line
+                    width: 3, // The line thickness
+                    radius: 10, // The radius of the inner circle
+                    corners: 1, // Corner roundness (0..1)
+                    rotate: 0, // The rotation offset
+                    direction: 1, // 1: clockwise, -1: counterclockwise
+                    color: '#C0D4FE', // #rgb or #rrggbb or array of colors
+                    speed: 1, // Rounds per second
+                    trail: 100, // Afterglow percentage
+                    shadow: true, // Whether to render a shadow
+                    hwaccel: false, // Whether to use hardware acceleration
+                    className: 'spinner', // The CSS class to assign to the spinner
+                    zIndex: 2e9, // The z-index (defaults to 2000000000)
+                    top: '50%', // Top position relative to parent
+                    left: '50%' // Left position relative to parent
+                    
+                };
+                var target = document.getElementById('spin');
+                spinner = new Spinner(opts).spin(target);
+                loading();
+                //  $("#spin").show();
+                setTimeout("query()", 3000);
+
+            }
+
+            function query() {
+                var orderNum = $("#order_id").val();
+                $.post('client/backend/queryRoute.php', {orderNum: orderNum}, function(result) {
+
+                    if (result.status == 0) {
+                        $("#routeStatus").val(result.status);
+                        $("#routeInfo").val(json2str(result.msg));
+                        $("#orderNum").val(orderNum); 
+                        $("#orderNewNum").val(result.newOrderNumber);
+                         $("#orderNewCompany").val(result.newOrderCompany);
+                        spinner.stop();
+                        $("#routeForm").submit();
+                    } else {
+                        spinner.stop();
+                        unloading();
+                        alert(result.msg);
+                    }
+                }, 'json');
+            }
+
+            function queryKey(event) {
+                if (event.keyCode == 13) {
+                    queryRoute();
+                }
+            }
+
+            $(document).ready(function() {
+                $('#headerContent').load('header.html');
+                $('#bottomContent').load('bottom.html');
+                $("#tips").load("static/tips.html");
+                  $("#index_notice").load("static/index_notice.html");
+            });
+
+            function loading() {
+                $("body").addClass('overlay');
+                document.addEventListener("click", handler, true);
+                $("#order_id").attr("disabled", "disabled");
+                
+            }
+            function handler(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+
+            function unloading() {
+                $("body").removeClass('overlay');
+                document.removeEventListener("click", handler, true);
+                    $("#order_id").removeAttr("disabled"); 
+            }
+
+        </script>
+    </head>
+    <body >
+
+        <div id="headerContent" >
+
+        </div>
+
+        <div style="background-color:#EEEEEE">
+            <div id="mainDiv" style="width:984px;margin:0 auto;background-color:white">
+
+                <div>
+                    <img src="imgs/homepage_plane.png" width="984" height="344"/>    
+                </div>
+
+                <div style="height:100%; overflow:hidden;" >
+                    <div class="shadow">  
+                        <img src="imgs/homepage_gradient1.png" height="20" width="67%"/>
+                    </div> 
+
+                    <div style="margin-left:48px;margin-right:48px;">
+                        <div style="width:617px;display:inline-block;float:left;">
+
+                            <div style="height:175px">
+
+                                <div class="divBlock shadowBlock">
+                                    <div style="width:100%">
+                                        <div style="width:95%;margin-right: 5px;text-align: left;display:inline-block;">
+                                            <div class="notice" style="padding-left:17px;"> 公告 </div> <img src="imgs/homepage_window.png" width="26" height="21" style="vertical-align:middle;"  />
+
+                                            <div class="noticeContent1">
+                                                <div class="dashline" style="margin:0"  ></div>
+                                                <div id="index_notice" style="display:inline"></div>
+                                                <a href="client/frontend/notice.html?title=31"> <img src="imgs/homepage_read_more.png"  height="10" width="6" border="0"/></a>
+                                            </div>
+
+                                        </div>
+             
+                                    </div>
+                                    <div style="margin:7px 16px;">
+                                        <div class="dashline" style="margin:0;"></div>
+                                        <div style="height:21px;line-height: 21px;font-size: 12px;margin-bottom:3px;font-family: 'Hei Regular',黑体">
+                                            <img src="imgs/homepage_quota.png" width="21" height="21" style="margin: 0 5px 3px 1px;vertical-align:middle;display:inline-block;float:left;" />
+                                          公司上班时间: 9:00 AM - 18:30 PM
+                                        </div>
+                                        <div class="dashline" style="margin:0" ></div>
+                                    </div>
+                                </div>   
+
+                                <div class="dashlineVertical"></div>  
+
+                                <div class="divBlock shadowBlock" >
+                                    <div style="padding:0 19px">
+                                        <div style="height:40px;width: 100%;text-align: left">
+
+                                            <div class="notice" style="padding-top:6px;"><a href="client/frontend/orderQuery.html?title=22" style="text-decoration: none"> 单号查询 </a></div> 
+
+                                             <div class="notice" style="padding-top:6px;"><a href="client/frontend/uploadID.html?title=23" style="text-decoration: none"> 证件上传 </a></div> 
+                                            <img src="imgs/homepage_window.png" width="26" height="21" style="vertical-align:middle;"  />
+                                 
+                                            <div class="dashline" style="margin:0"  ></div>
+                                        </div>
+
+                                        <div style="height:84px;margin-top:5px;text-align:center">
+                                            <div style="border:1px solid #575757;">
+
+                                                <div class="queryDesc"> 请输入单号:</div>
+                                                <div >
+                                                    <input id="order_id" type="text" class="queryTextBox"  onkeydown="queryKey(event)" />
+                                                </div>
+                                                <div  style=" text-align: right; background-color:#F1F1F1;height:25px;">
+                                                    <input type="button"  onclick = "queryRoute();" class="queryButton" id="queryOrderRoute" />
+                                                </div>
+                                            </div>
+
+                                            <div class="noticeContent" style="width:100%;margin-top:6px">
+                                                <div id="tips"></div>
+                                            </div>
+                                            <div id="spin"></div>
+                                            <div style="display:none">
+                                                <form action="client/frontend/queryRoute.php?title=22" id='routeForm' method="post">
+                                                    <textarea id='routeStatus' name='routeStatus'></textarea>
+                                                    <textarea id='routeInfo' name='routeInfo'></textarea>
+                                                    <textarea id='orderNum' name='orderNum'></textarea>
+                                                    <input id='orderNewNum' name='orderNewNum'/>
+                                                      <input id='orderNewCompany' name='orderNewCompany'/>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="dashlineVertical"></div>   
+                            </div>
+                        </div>
+                        <div style="width:29%;display:inline-block;float:left;height:180px;padding-top:10px;">
+                            <img src="imgs/homepage_map.jpg" height="157" width="280"/>
+
+                        </div>
+                    </div>
+                </div>
+ <div class="dashline"  ></div>
+                <div style="margin:5px 28px 5px 28px;">
+                    <div >
+                        <img src="imgs/homepage_phone.png" width="33" height="33" style="margin-right: 10px;vertical-align:middle;" />
+                        <div class="contact">
+                            <span class="contactTitle" >海外客服:</span> <span class="contactNum">+61 0450 650 305</span> <span class="contactTitle" >中国客服:</span> <span class="contactNum">+86 4000 129 219</span> 
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div id="bottomContent"> </div>
+
+
+            </div>
+        </div>
+
+    </body>
+</html>
