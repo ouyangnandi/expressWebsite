@@ -262,6 +262,11 @@
                             eval(saveFunction + "()");
                         }
                     }
+                    
+                     if ( e.keyCode == 13) {
+                        e.preventDefault();
+
+                    }
 
 
                     //Esc

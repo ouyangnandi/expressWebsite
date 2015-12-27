@@ -87,6 +87,16 @@ body {
     cursor:pointer;
 }
 
+#wechat {
+    float: right;
+    height:100px;
+    display:inline;
+    width:100px;
+    background: url("../imgs/wechat.jpg");
+    background-repeat:no-repeat;
+    background-size: 100px 100px;
+}
+
 #logo2 {
     height:41px;
     width:101px;
@@ -277,7 +287,6 @@ body {
     vertical-align:middle;
     display:inline-block;
     height:100%;
-    width:750px;
     position:relative;
     left: -30px;
     text-align:left;

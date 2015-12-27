@@ -61,10 +61,10 @@ function replyFeedback() {
     $mail->IsSMTP(); // 使用SMTP方式发送
     $mail->Host = "mail.canexpress.com.au"; // 您的企业邮局域名
     $mail->SMTPAuth = true; // 启用SMTP验证功能
-    $mail->Username = "info@canexpress.com.au"; // 邮局用户名(请填写完整的email地址)
-    $mail->Password = "INFO@canexpress"; // 邮局密码
+    $mail->Username = "customservice@canexpress.com.au"; // 邮局用户名(请填写完整的email地址)
+    $mail->Password = "9ssy9wHKmT"; // 邮局密码
     $mail->Charset = 'UTF-8';
-    $mail->From = "info@canexpress.com.au"; //邮件发送者email地址
+    $mail->From = "customservice@canexpress.com.au"; //邮件发送者email地址
     $mail->FromName = "能通速递客服中心";
     $mail->AddAddress($receiver, "");
     $mail->Subject = "=?utf-8?B?" . base64_encode($title) . "?=";

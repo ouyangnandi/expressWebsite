@@ -17,7 +17,7 @@ fclose($handle);
         <div style="margin:20px 0;"></div>
         <div  style="text-align:center">
 
-            <form id="tip_fm" method="post" >
+            <form id="tipIndex_fm" method="post" >
 
                 <div style="margin:10px">
                     <textarea style="width:98%" rows="15" id="index_notices_content" name="index_notices_content">
@@ -41,7 +41,7 @@ fclose($handle);
              
                 function submitTips() {
                          nicEditors.findEditor('index_notices_content').saveContent();
-                    $('#tip_fm').form('submit', {
+                    $('#tipIndex_fm').form('submit', {
                         url: '../admin/tabPagesBehind/adminNoticeIndexB.php',
                         onSubmit: function() {
                             return $(this).form('validate');
